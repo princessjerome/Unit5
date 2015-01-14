@@ -33,10 +33,10 @@ public class TaskProgram extends javax.swing.JFrame {
         lblctask = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblttask = new javax.swing.JLabel();
-        btnlastleft = new javax.swing.JButton();
-        btnlast = new javax.swing.JButton();
+        btnstart = new javax.swing.JButton();
+        btnback = new javax.swing.JButton();
         btnnext = new javax.swing.JButton();
-        btnlastright = new javax.swing.JButton();
+        btnlast = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnushowall = new javax.swing.JMenuItem();
@@ -78,13 +78,28 @@ public class TaskProgram extends javax.swing.JFrame {
         lblttask.setText("0");
         lblttask.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btnlastleft.setText("|<");
+        btnstart.setText("|<");
+        btnstart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnstartActionPerformed(evt);
+            }
+        });
 
-        btnlast.setText("<");
+        btnback.setText("<");
 
         btnnext.setText(">");
+        btnnext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnextActionPerformed(evt);
+            }
+        });
 
-        btnlastright.setText(">|");
+        btnlast.setText(">|");
+        btnlast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlastActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Program");
 
@@ -109,9 +124,19 @@ public class TaskProgram extends javax.swing.JFrame {
         jMenu2.setText("Edit");
 
         mnureplace.setText("Replace Current Task");
+        mnureplace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnureplaceActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnureplace);
 
         mnuremove.setText("Remove Current Task");
+        mnuremove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuremoveActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnuremove);
 
         mnurestore.setText("Restore Current Task to Screen");
@@ -177,13 +202,13 @@ public class TaskProgram extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblttask, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnlastleft)
+                                .addComponent(btnstart)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnlast)
+                                .addComponent(btnback)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnnext)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnlastright)
+                                .addComponent(btnlast)
                                 .addGap(46, 46, 46))))))
         );
         layout.setVerticalGroup(
@@ -205,10 +230,10 @@ public class TaskProgram extends javax.swing.JFrame {
                     .addComponent(lblttask))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnlastleft)
-                    .addComponent(btnlast)
+                    .addComponent(btnstart)
+                    .addComponent(btnback)
                     .addComponent(btnnext)
-                    .addComponent(btnlastright))
+                    .addComponent(btnlast))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -220,7 +245,12 @@ public class TaskProgram extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnameActionPerformed
 
     private void mnushowallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnushowallActionPerformed
-        // TODO add your handling code here:
+        String result = "";
+        for(int x=0;x<list.size();x++){
+            t=(Task)list.get(x);
+            result+="TASK " + (x+1) + ":\n" + t.toString()+ "\n";
+        }
+        JOptionPane.showMessageDialog(this,result);
     }//GEN-LAST:event_mnushowallActionPerformed
 
     private void mnuclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuclearActionPerformed
@@ -253,6 +283,77 @@ public class TaskProgram extends javax.swing.JFrame {
         lblctask.setText(""+curtask);
         JOptionPane.showMessageDialog(this, "Task Added");
     }//GEN-LAST:event_mnuafterActionPerformed
+
+    private void btnstartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnstartActionPerformed
+
+    private void btnlastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlastActionPerformed
+        if(curtask == tottask) return;
+        while(li.hasNext())
+            li.next();
+        t=(Task)li.previous();
+        curtask = tottask;
+        lblctask.setText(""+curtask);
+        txtname.setText(t.getName());
+        txtdesc.setText(t.getDescription());
+                
+    }//GEN-LAST:event_btnlastActionPerformed
+
+    private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
+        if(curtask==tottask) return;
+        curtask++;
+        lblctask.setText(""+curtask);
+        li.next();
+        li.next();
+        t = (Task)li.previous();
+        txtname.setText(t.getName());
+        txtdesc.setText(t.getDescription());
+        
+    }//GEN-LAST:event_btnnextActionPerformed
+
+    private void mnureplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnureplaceActionPerformed
+        if(tottask == 0){
+            JOptionPane.showMessageDialog(this,"No task to replace this with, use Insert instead");
+            return;
+        }
+        String nm = txtname.getText();
+        String d = txtdesc.getText();
+        Task t = new Task(nm, d);
+        if(t.validate()==false){
+            JOptionPane.showMessageDialog(this, "Error - Must enter all information");
+            return;
+        }
+        li.next();
+        li.set(t);
+        li.previous();
+    }//GEN-LAST:event_mnureplaceActionPerformed
+
+    private void mnuremoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuremoveActionPerformed
+        if(tottask==0)return;
+        li.next();
+        li.remove();
+        tottask--;
+        lblttask.setText(""+tottask);
+        if(tottask == 0){
+            txtname.setText("");
+            txtdesc.setText("");
+            curtask = 0;
+            lblctask.setText("n/a");
+            return;
+        }
+        if(tottask>1){
+            li.next();
+            t=(Task)li.previous();
+        }
+        else if(tottask == 1){
+            t = (Task)li.previous();
+            curtask = 1;
+            lblctask.setText(""+curtask);
+        }
+        txtname.setText(t.getName());
+        txtdesc.setText(t.getDescription());
+    }//GEN-LAST:event_mnuremoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,10 +391,10 @@ public class TaskProgram extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnback;
     private javax.swing.JButton btnlast;
-    private javax.swing.JButton btnlastleft;
-    private javax.swing.JButton btnlastright;
     private javax.swing.JButton btnnext;
+    private javax.swing.JButton btnstart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
