@@ -86,6 +86,11 @@ public class TaskProgram extends javax.swing.JFrame {
         });
 
         btnback.setText("<");
+        btnback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbackActionPerformed(evt);
+            }
+        });
 
         btnnext.setText(">");
         btnnext.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +165,11 @@ public class TaskProgram extends javax.swing.JFrame {
         jMenu3.setText("Insert");
 
         mnubefore.setText("Before Current Task");
+        mnubefore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnubeforeActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnubefore);
 
         mnuafter.setText("After Current Task");
@@ -354,6 +364,19 @@ public class TaskProgram extends javax.swing.JFrame {
         txtname.setText(t.getName());
         txtdesc.setText(t.getDescription());
     }//GEN-LAST:event_mnuremoveActionPerformed
+
+    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
+        if(curtask==1) return;
+        curtask--;
+        lblctask.setText(""+curtask);
+        t = (Task)li.previous();
+        txtname.setText(t.getName());
+        txtdesc.setText(t.getDescription());
+    }//GEN-LAST:event_btnbackActionPerformed
+
+    private void mnubeforeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnubeforeActionPerformed
+        
+    }//GEN-LAST:event_mnubeforeActionPerformed
 
     /**
      * @param args the command line arguments
