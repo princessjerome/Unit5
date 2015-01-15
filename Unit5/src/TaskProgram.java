@@ -269,8 +269,7 @@ public class TaskProgram extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuclearActionPerformed
 
     private void mnurestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnurestoreActionPerformed
-        li.next();
-        t=(Task)li.previous();
+        
         txtdesc.setText(t.getDescription());
         txtname.setText(t.getName());
     }//GEN-LAST:event_mnurestoreActionPerformed
@@ -282,7 +281,7 @@ public class TaskProgram extends javax.swing.JFrame {
     private void mnuafterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuafterActionPerformed
         String nm = txtname.getText();
         String d = txtdesc.getText();
-        Task t = new Task(nm, d);
+        t = new Task(nm, d);
         if(t.validate()==false){
             JOptionPane.showMessageDialog(this, "Error - Must enter all information");
             return;
@@ -296,6 +295,7 @@ public class TaskProgram extends javax.swing.JFrame {
         lblttask.setText(""+tottask);
         lblctask.setText(""+curtask);
         JOptionPane.showMessageDialog(this, "Task Added");
+        
     }//GEN-LAST:event_mnuafterActionPerformed
 
     private void btnstartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstartActionPerformed
@@ -343,7 +343,7 @@ public class TaskProgram extends javax.swing.JFrame {
         }
         String nm = txtname.getText();
         String d = txtdesc.getText();
-        Task t = new Task(nm, d);
+        t = new Task(nm, d);
         if(t.validate()==false){
             JOptionPane.showMessageDialog(this, "Error - Must enter all information");
             return;
@@ -391,7 +391,7 @@ public class TaskProgram extends javax.swing.JFrame {
     private void mnubeforeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnubeforeActionPerformed
         String nm = txtname.getText();
         String d = txtdesc.getText();
-        Task t = new Task(nm, d);
+        t = new Task(nm, d);
         if(t.validate()==false){
             JOptionPane.showMessageDialog(this, "Error - Must enter all information");
             return;
