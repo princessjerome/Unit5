@@ -1,20 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author jere1330
- */
+import javax.swing.JOptionPane;
+
+
 public class EmergencyGUI extends javax.swing.JFrame {
-
-    /**
-     * Creates new form EmergencyGUI
-     */
+    Patient p;
+    LinkedPriorityQueue lpq;
+    
     public EmergencyGUI() {
         initComponents();
+        lpq = new LinkedPriorityQueue(3);
+        
+        
     }
 
     /**
@@ -40,21 +36,37 @@ public class EmergencyGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jLabel1.setText("Patient Name:");
 
+        txtpatient.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
+
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jRadioButton1.setText("Fair Condition");
 
+        jRadioButton2.setBackground(new java.awt.Color(0, 51, 255));
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jRadioButton2.setText("Serious Condition");
 
+        jRadioButton3.setBackground(new java.awt.Color(255, 0, 51));
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jRadioButton3.setText("Critical Condition");
 
+        btnschedule.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         btnschedule.setText("Schedule");
+        btnschedule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnscheduleActionPerformed(evt);
+            }
+        });
 
+        btnnext.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         btnnext.setText("Treat Next");
 
+        btnall.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         btnall.setText("Treat All");
         btnall.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +75,7 @@ public class EmergencyGUI extends javax.swing.JFrame {
         });
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -76,7 +89,7 @@ public class EmergencyGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(txtpatient, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,7 +100,7 @@ public class EmergencyGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnnext, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnall, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnschedule, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnschedule, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,7 +123,7 @@ public class EmergencyGUI extends javax.swing.JFrame {
                     .addComponent(jRadioButton3)
                     .addComponent(btnall))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,6 +132,27 @@ public class EmergencyGUI extends javax.swing.JFrame {
     private void btnallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnallActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnallActionPerformed
+
+    private void btnscheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnscheduleActionPerformed
+        String nm = txtpatient.getText();
+        int cond = -1;
+        if(jRadioButton1.isSelected()) cond = 2;
+        else if(jRadioButton2.isSelected()) cond = 1;
+        else if(jRadioButton3.isSelected()) cond = 0;
+        p = new Patient(nm, cond);
+        if(p.validate()==false){
+            JOptionPane.showMessageDialog(this, "Error - Must enter a patient name");
+            return;
+        }
+        buttonGroup1.clearSelection();
+        txtpatient.setText("" + cond);
+        if(cond == 0)
+            lpq.enqueue(p, 0);
+        else if(cond == 1)
+            lpq.enqueue(p, 1);
+        else if(cond == 2)
+            lpq.enqueue(p, 2);
+    }//GEN-LAST:event_btnscheduleActionPerformed
 
     /**
      * @param args the command line arguments
