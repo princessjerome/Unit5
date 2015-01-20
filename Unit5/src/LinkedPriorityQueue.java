@@ -24,7 +24,7 @@ public class LinkedPriorityQueue implements PriorityQueue{
         if(list[0].isEmpty()){
             if(list[1].isEmpty()){
                 if(list[2].isEmpty()){
-                    throw new IllegalStateException("All patients are treated");
+                    return "";
                 }
                 else return list[2].remove(0);
             }
@@ -53,7 +53,7 @@ public class LinkedPriorityQueue implements PriorityQueue{
         if(list[0].isEmpty()){
             if(list[1].isEmpty()){
                 if(list[2].isEmpty()){
-                    throw new IllegalStateException("All patients are treated");
+                    return "";
                 }
                 else return list[2].get(0);
             }

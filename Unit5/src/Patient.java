@@ -1,8 +1,8 @@
 public class Patient {
     private String name;
-    private int condition;
+    private String condition;
     
-    public Patient(String nm, int cond){
+    public Patient(String nm, String cond){
         name = nm;
         condition = cond;
     }
@@ -11,16 +11,29 @@ public class Patient {
         return name;
     }
     
-    public int getCondition(){
+    public String getCondition(){
         return condition;
     }
 
     public boolean validate()
     {
-        if (name == null || name == "")
+        if (name == null || name == "" || condition == null || condition == "")
             return false;
         else
             return true;
     }
     
+    public boolean setName(String nm){
+        if (nm.equals(""))
+			return false;
+		else{
+			name=nm;
+			return true;
+                }
+    }
+    
+    public String toString()
+    {
+        return condition + " condition " + name + " ";
+    }
 }

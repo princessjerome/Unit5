@@ -24,7 +24,7 @@ public class EmergencyGUI extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        txtpatient = new javax.swing.JTextField();
+        txtname = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -32,28 +32,49 @@ public class EmergencyGUI extends javax.swing.JFrame {
         btnnext = new javax.swing.JButton();
         btnall = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtpatients = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jLabel1.setText("Patient Name:");
 
-        txtpatient.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
+        txtname.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jRadioButton1.setText("Fair Condition");
+        jRadioButton1.setActionCommand("Fair");
+        jRadioButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jRadioButton1.setBorderPainted(true);
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         jRadioButton2.setBackground(new java.awt.Color(0, 51, 255));
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jRadioButton2.setText("Serious Condition");
+        jRadioButton2.setActionCommand("Serious");
+        jRadioButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 204)));
+        jRadioButton2.setBorderPainted(true);
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jRadioButton3.setBackground(new java.awt.Color(255, 0, 51));
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         jRadioButton3.setText("Critical Condition");
+        jRadioButton3.setActionCommand("Critical");
+        jRadioButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
+        jRadioButton3.setBorderPainted(true);
 
         btnschedule.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         btnschedule.setText("Schedule");
@@ -65,6 +86,11 @@ public class EmergencyGUI extends javax.swing.JFrame {
 
         btnnext.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         btnnext.setText("Treat Next");
+        btnnext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnextActionPerformed(evt);
+            }
+        });
 
         btnall.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
         btnall.setText("Treat All");
@@ -74,10 +100,17 @@ public class EmergencyGUI extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtpatients.setEditable(false);
+        txtpatients.setColumns(20);
+        txtpatients.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
+        txtpatients.setRows(5);
+        jScrollPane1.setViewportView(txtpatients);
+
+        jLabel2.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
+        jLabel2.setText(" Patient Name");
+
+        jLabel3.setFont(new java.awt.Font("QuickType II", 0, 12)); // NOI18N
+        jLabel3.setText("Condition");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,10 +121,6 @@ public class EmergencyGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(txtpatient, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton3)
                             .addComponent(jRadioButton2)
@@ -100,7 +129,16 @@ public class EmergencyGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnnext, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnall, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnschedule, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnschedule, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                        .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,7 +147,7 @@ public class EmergencyGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtpatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
@@ -122,37 +160,70 @@ public class EmergencyGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton3)
                     .addComponent(btnall))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnallActionPerformed
-        // TODO add your handling code here:
+        if(lpq.peekFront()==""){
+            JOptionPane.showMessageDialog(this, "No patients to treat.");
+            return;
+        }
+        while(lpq.peekFront()!= ""){
+            txtpatients.append(lpq.dequeue() + "has been treated.\n");
+        }
     }//GEN-LAST:event_btnallActionPerformed
 
     private void btnscheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnscheduleActionPerformed
-        String nm = txtpatient.getText();
-        int cond = -1;
-        if(jRadioButton1.isSelected()) cond = 2;
-        else if(jRadioButton2.isSelected()) cond = 1;
-        else if(jRadioButton3.isSelected()) cond = 0;
+        String nm, cond="";
+        try{
+        nm = txtname.getText();
+        cond = buttonGroup1.getSelection().getActionCommand();
         p = new Patient(nm, cond);
-        if(p.validate()==false){
-            JOptionPane.showMessageDialog(this, "Error - Must enter a patient name");
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "Error - Fill out all areas");
+            return;            
+        };
+        //checks whether name is valid
+        if(p.setName(nm)==false){
+            JOptionPane.showMessageDialog(this, "Error - Fill out a valid name");
             return;
         }
-        buttonGroup1.clearSelection();
-        txtpatient.setText("" + cond);
-        if(cond == 0)
+        if(cond == "Critical")
             lpq.enqueue(p, 0);
-        else if(cond == 1)
+        else if(cond == "Serious")
             lpq.enqueue(p, 1);
-        else if(cond == 2)
+        else if(cond == "Fair")
             lpq.enqueue(p, 2);
+        txtpatients.append(p.getName() + "\t" + p.getCondition() + "\tWaiting...\n" );
+        buttonGroup1.clearSelection();
+        txtname.setText("");
     }//GEN-LAST:event_btnscheduleActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
+        if(lpq.peekFront()==""){
+            JOptionPane.showMessageDialog(this, "No patients to treat.");
+            return;
+        }        
+        txtpatients.append(lpq.dequeue() + "has been treated.\n");
+    }//GEN-LAST:event_btnnextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,11 +266,13 @@ public class EmergencyGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnschedule;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField txtpatient;
+    private javax.swing.JTextField txtname;
+    private javax.swing.JTextArea txtpatients;
     // End of variables declaration//GEN-END:variables
 }
